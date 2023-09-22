@@ -1,0 +1,72 @@
+:root {
+  --todo-intput-height: 3rem;
+  --todo-intput-font-size: 2rem;
+}
+
+body {
+  background-color:floralwhite;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 15vh;
+}
+
+#headerdivision {
+  background-color: lavender;
+  border: 5px solid #f77;
+  width: 100%
+}
+
+#new-diary-card {
+  background-color: blanchedalmond;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  float: right;
+  margin: 1rem;
+}
+
+h1 {
+  text-align: left;
+  font-size: 3rem;
+  display: inline;
+}
+
+#cards {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem;
+  gap: 1rem;
+  
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+}
+.date {
+  display: inline;
+}
+.moodtag {
+  background-color: aquamarine;
+  border: 1px solid black;
+  float: right;
+  border-radius: 1rem;
+  font-size: x-small;
+}
+.personaltag {
+  background-color: bisque;
+  border: 1px solid black;
+  float: right;
+  border-radius: 1rem;
+  font-size: x-small;
+}
+.description {
+  font-size: 1rem;
+
+}
