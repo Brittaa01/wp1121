@@ -11,8 +11,6 @@ export const getDiaryCards = async (req, res) => {
   } catch (error) {
     // If there is an error, return 500 and the error message
     // You can read more about HTTP status codes here:
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-    // Or this meme:
     // https://external-preview.redd.it/VIIvCoTbkXb32niAD-rxG8Yt4UEi1Hx9RXhdHHIagYo.jpg?auto=webp&s=6dde056810f99fc3d8dab920379931cb96034f4b
     return res.status(500).json({ message: error.message });
   }
@@ -39,7 +37,7 @@ export const createDiaryCard = async (req, res) => {
   console.log(found_date);
   if (found_date.length) {
     return res
-      .status(400)
+      .status(409)
       .json({ message: "Diary entery for this date already exists. Please edit preexisting diary entry" });
   }
 
@@ -69,7 +67,7 @@ export const updateDiaryCard = async (req, res) => {
     if (!existedDiaryCard) {
       return res.status(404).json({ message: "Diary card not found!" });
     }
-    
+
     // Update the card
     if (date !== undefined) existedDiaryCard.date = date;
     if (description !== undefined) existedDiaryCard.description = description;
@@ -90,9 +88,9 @@ export const updateDiaryCard = async (req, res) => {
 };
 
 export const getCardByID = async (req, res) => {
-  console.log("hit"); //denhär syns inte, den borde väl göra det?
+  console.log("hit");
   const { id } = req.params;
-  
+
   try {
     // Check if the id is valid
     const existedDiaryCard = await MyDiaryModel.findById(id);
@@ -101,7 +99,7 @@ export const getCardByID = async (req, res) => {
     }
     return res.status(200).json(existedDiaryCard);
   } catch (error) {
-    console.log(error); //här är error 500
+    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 

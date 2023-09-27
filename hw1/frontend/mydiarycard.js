@@ -19,29 +19,29 @@ const instance = axios.create({
 async function main() {
   setupEventListeners();
   if (id) {
-  try {
-    existingCard = await getCard(id);
-    console.log(existingCard);
-    createCardElement(existingCard);
-  } catch (error) {
-    console.log(error);
-    alert("Failed to load todos!");
-  }
-} else {
-  moodtag.disabled = false;
-  personaltag.disabled = false;
-  description.disabled = false;
-  editDiaryCardButton.disabled = true;
-  buttons.hidden = false;
+    try {
+      existingCard = await getCard(id);
+      console.log(existingCard);
+      createCardElement(existingCard);
+    } catch (error) {
+      console.log(error);
+      alert("Failed to load todos!");
+    }
+  } else {
+    moodtag.disabled = false;
+    personaltag.disabled = false;
+    description.disabled = false;
+    editDiaryCardButton.disabled = true;
+    buttons.hidden = false;
 
-  existingCard = {
+    existingCard = {
       date: new Date().toLocaleDateString(),
       moodtag: "Happy",
-      personaltag : "Social",
+      personaltag: "Social",
       description: "Today was a good day!",
     };
     createCardElement(existingCard);
-}
+  }
 }
 
 function setupEventListeners() {
@@ -56,44 +56,48 @@ function setupEventListeners() {
   });
 
   saveButton.addEventListener("click", async () => {
-    console.log(existingCard);
     let card = {
       date: existingCard.date,
       moodtag: moodtag.value,
-      personaltag : personaltag.value,
+      personaltag: personaltag.value,
       description: description.value,
     };
-    if(id) {
-    try {
-      await updateCard(existingCard.id, card);
-      window.location.assign("indexmydiary.html");
-    } catch (error){
-      console.log(error);
-      alert("Failed to update card! Remeber that the tags you can enter is only Happy, Sad and Angry for mood, and Schoolwork, Clubactivity and Social for the social tag.")
-    }
+    if (id) {
+      try {
+        await updateCard(existingCard.id, card);
+        window.location.assign("indexmydiary.html");
+      } catch (error) {
+        console.log(error);
+        alert("Failed to update card! Remeber that the tags you can enter is only Happy, Sad and Angry for mood, and Schoolwork, Clubactivity and Social for the social tag.")
+      }
     } else {
+
       try {
         await saveCard(card);
         window.location.assign("indexmydiary.html");
-      } catch (error){
-        console.log(error);
-        alert("Failed to save card! Remeber that the tags you can enter is only Happy, Sad and Angry for mood, and Schoolwork, Clubactivity and Social for the social tag.")
+      } catch (error) {
+        if (error.response.status === 409) {
+          alert("Diary entry alredy exists for this day! Please edit preexisting card");
+        } else {
+          console.log(error);
+          alert("Failed to save card! Remeber that the tags you can enter is only Happy, Sad and Angry for mood, and Schoolwork, Clubactivity and Social for the social tag.")
+        }
       }
     }
-    
-    
 
   });
 
   cancelButton.addEventListener("click", async () => {
+    if (!id) {
+      window.location.assign("indexmydiary.html");
+    }
     moodtag.disabled = true;
     personaltag.disabled = true;
     description.disabled = true;
     editDiaryCardButton.disabled = false;
     buttons.hidden = true;
     try {
-      const card = await getCard();
-      console.log(card);
+      const card = await getCard(id);
       createCardElement(card);
     } catch (error) {
       console.log(error);
@@ -105,34 +109,35 @@ function setupEventListeners() {
 
 function createCardElement(card) {
   const parts = card.date.split("/");
-  console.log(parts);
   const d = new Date(
     parseInt(parts[2], 10),
     parseInt(parts[0], 10) - 1,
     parseInt(parts[1], 10));
 
-  console.log(d);
   const day = d.getDay();
-  dateElement.innerText = `${parts[2]}.${parts[0]}.${parts[1]}(${days[day]})`;
+  dateElement.innerText = `${parts[2]}.${addZero(parts[0])}.${addZero(parts[1])}(${days[day]})`;
 
   moodtag.value = card.moodtag;
   personaltag.value = card.personaltag;
   description.value = card.description;
   return item;
 }
+//add a zero to the day or month id it is single digit
+function addZero(s) {
+  if (s.length === 1) {
+    return "0" + s;
+  } else {
+    return s;
+  }
+}
 
 async function getCard(id) {
-
-  //när jag satte den här syntes den, så det är rad68 som är fel
   const response = await instance.get("/mydiary/card/" + id);
-  console.log("hit");
   return response.data;
 }
 
 async function updateCard(id, card) {
-  console.log(id);
-  console.log(card);
-  const response = await instance.put("/mydiary/"+id, card);
+  const response = await instance.put("/mydiary/" + id, card);
   return response.data;
 }
 

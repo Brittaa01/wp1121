@@ -21,8 +21,7 @@ async function main() {
 function setupEventListeners() {
   const addDiaryCardButton = document.querySelector("#new-diary-card");
 
-  addDiaryCardButton.addEventListener("click", async () => { 
-    
+  addDiaryCardButton.addEventListener("click", async () => {
     window.location.assign("mydiarycard.html");
   });
 
@@ -39,21 +38,17 @@ function createCardElement(card) {
   container.id = card.id;
   console.log(card);
   container.addEventListener("click", () => {
-    window.location.assign("mydiarycard.html?id="+card.id)
+    window.location.assign("mydiarycard.html?id=" + card.id)
   })
   const dateElement = item.querySelector(".date");
   const parts = card.date.split("/");
-  console.log(parts);
   const d = new Date(
     parseInt(parts[2], 10),
     parseInt(parts[0], 10) - 1,
     parseInt(parts[1], 10));
 
-  console.log(d);
   const day = d.getDay();
-
-
-  dateElement.innerText = `${parts[2]}.${parts[0]}.${parts[1]}(${days[day]})`;
+  dateElement.innerText = `${parts[2]}.${addZero(parts[0])}.${addZero(parts[1])}(${days[day]})`;
 
   const moodtag = item.querySelector(".moodtag");
   moodtag.innerText = card.moodtag;
@@ -68,6 +63,14 @@ function createCardElement(card) {
 async function getCards() {
   const response = await instance.get("/mydiary");
   return response.data;
+}
+
+function addZero(s) {
+  if (s.length === 1) {
+    return "0" + s;
+  } else {
+    return s;
+  }
 }
 
 

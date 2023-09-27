@@ -10,17 +10,18 @@ import express from "express";
 // Create an express router
 const router = express.Router();
 
-// Every path we define here will get /api/todos prefix
+// Every path we define here will get /api/mydiary prefix
 // To make code even more cleaner we can wrap functions in `./controllers` folder
 
-// GET /api/todos
+// GET /api/mydiary
 router.get("/", getDiaryCards);
-// POST /api/todos
+// POST /api/mydiary
 router.post("/", createDiaryCard);
-// PUT /api/todos/:id
+// PUT /api/mydiary/:id
 router.put("/:id", updateDiaryCard);
-// DELETE /api/todos/:id
+// DELETE /api/mydiary/:id
 router.delete("/:id", deleteDiaryCard);
+// GET /api/mydiary/:id
 router.get("/card/:id", getCardByID);
 
 // export the router

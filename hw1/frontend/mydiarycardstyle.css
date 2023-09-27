@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color:floralwhite;
+  background-color: floralwhite;
   max-width: 700px;
   width: 100%;
   margin: 0 auto;
@@ -25,6 +25,7 @@ body {
   font-size: small;
   margin: 0.5rem;
 }
+
 .personaltag {
   background-color: bisque;
   border: 1px solid black;
@@ -33,6 +34,7 @@ body {
   font-size: small;
   margin: 0.5rem;
 }
+
 .date {
   float: right;
   margin: 0.5rem;
@@ -43,12 +45,7 @@ body {
   float: right;
   padding: 0 1rem;
   gap: 1rem;
-  
-}
 
-#textarea {
-  margin: 1rem; 
- 
 }
 
 .description {
@@ -56,5 +53,5 @@ body {
   font-size: 1rem;
   width: 50%;
   height: 20 rem;
-  
+
 }

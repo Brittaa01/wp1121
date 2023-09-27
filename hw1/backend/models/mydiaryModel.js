@@ -22,8 +22,7 @@ const myDiarySchema = new mongoose.Schema(
       enum: ["Schoolwork", "Social", "Clubactivity"],
     },
   },
-  // The second argument is an options object.
-  // In this case, we want to rename _id to id and remove __v
+
   {
     toJSON: {
       transform(doc, ret) {
@@ -34,7 +33,7 @@ const myDiarySchema = new mongoose.Schema(
     },
     // This option is to make sure that when a new document is created,
     // the timestamps will be added automatically.
-    // You can comment this out to see the difference.
+
     timestamps: true,
   },
 );
