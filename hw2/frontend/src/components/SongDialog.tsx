@@ -77,7 +77,7 @@ export default function SongDialog(props: SongDialogProps) {
           title: newTitle,
           singer: newSinger,
           url: newUrl,
-          list_id: listId,
+          list_id: newListId,
         });
       } else {
         if (
@@ -146,8 +146,8 @@ export default function SongDialog(props: SongDialogProps) {
             <Typography className="text-start">{newTitle}</Typography>
           </button>
         )}
-        <Select
-          value={newListId}
+           <Select
+          value = {newListId}
           onChange={(e) => setNewListId(e.target.value)}
         >
           {lists.map((list) => (
@@ -155,6 +155,7 @@ export default function SongDialog(props: SongDialogProps) {
               {list.name}
             </MenuItem>
           ))}
+ 
         </Select>
         {variant === "edit" && (
           <IconButton color="error" onClick={handleDelete}>
@@ -175,7 +176,7 @@ export default function SongDialog(props: SongDialogProps) {
               className="bg-white/0 p-2"
               autoFocus
               defaultValue={singer}
-              placeholder="Add a more detailed singer..."
+              placeholder="Add a singer..."
               onChange={(e) => setNewSinger(e.target.value)}
             />
           </ClickAwayListener>

@@ -5,7 +5,8 @@ import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import { DataGrid, GridColDef, useGridApiRef } from '@mui/x-data-grid';
+import { DataGrid, useGridApiRef } from '@mui/x-data-grid';
+import type {GridColDef} from '@mui/x-data-grid';
 
 import useSongs from "@/hooks/useSongs";
 import { deleteSong, updateList } from "@/utils/client";
@@ -13,7 +14,7 @@ import { deleteSong, updateList } from "@/utils/client";
 
 
 import SongDialog from "./SongDialog";
-import {Box, Link, Stack } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 
 /* comment*/
 export type PlayListProps = {
@@ -70,16 +71,13 @@ export default function PlayList({ id }: PlayListProps) {
     const selectedTitles = Array.from(selectedRows.values()).reduce((accumulator, currentValue) => accumulator + currentValue.title + "\n", "");
     if (confirm("Are you sure you want th delete the songs :" + selectedTitles)) {
       try {
-        console.log(apiRef.current.getSelectedRows())
-        for (let songId of selectedRows.keys()) {
-          console.log(songId);
+        for (const songId of selectedRows.keys()) {
           await deleteSong(songId.toString());
 
         }
         fetchSongs();
       } catch (error) {
         alert("Error: Failed to delete song");
-      } finally {
       }
     }
 
@@ -88,9 +86,11 @@ export default function PlayList({ id }: PlayListProps) {
   const columns: GridColDef[] = [
     { field: 'title', headerName: 'Song', width: 200 },
     { field: 'singer', headerName: 'Singer', width: 400 },
-    { field: 'url', headerName: 'Link', width: 500,  renderCell: (params) => (
-    <Link href ={`${params.value}`} target="_blank">{params.value} </Link>
-  ) },
+    {
+      field: 'url', headerName: 'Link', width: 500, renderCell: (params) => (
+        <Link href={`${params.value}`} target="_blank">{params.value} </Link>
+      )
+    },
   ];
   const apiRef = useGridApiRef();
 
@@ -160,7 +160,7 @@ export default function PlayList({ id }: PlayListProps) {
             direction="row"
             justifyContent="flex-end"
             spacing={2}>
-              
+
             <Button
               variant="contained"
               className="w-30"

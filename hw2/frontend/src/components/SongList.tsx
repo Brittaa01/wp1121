@@ -24,7 +24,7 @@ export type SongListProps = {
   description?: string;
 };
 
-export default function SongList({ length, id, name, songs, deleteMode }: SongListProps) {
+export default function SongList({ length, id, name, deleteMode }: SongListProps) {
   const [openNewSongDialog, setOpenNewSongDialog] = useState(false);
   const [edittingName, setEdittingName] = useState(false);
   const { fetchLists } = useSongs();
@@ -71,28 +71,9 @@ export default function SongList({ length, id, name, songs, deleteMode }: SongLi
         />
 
         <div className="flex gap-4">
-
-          {edittingName ? (
-            <ClickAwayListener onClickAway={handleUpdateName}>
-              <Input
-                autoFocus
-                defaultValue={name}
-                className="grow"
-                placeholder="Enter a new name for this list..."
-                sx={{ fontSize: "2rem" }}
-                inputRef={inputRef}
-              />
-            </ClickAwayListener>
-          ) : (
-            <button
-              onClick={() => setEdittingName(true)}
-              className="w-full rounded-md p-2 hover:bg-white/10"
-            >
               <Typography className="text-start" variant="h6">
                 {name}
               </Typography>
-            </button>
-          )}
         </div>
         <div className="flex flex-col gap-4">
           {/*{songs.map((song) => (

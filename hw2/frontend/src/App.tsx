@@ -53,8 +53,8 @@ function App() {
           <main className="mx-auto flex max-h-full flex-row gap-6 px-24 py-12">
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
               {lists.map((list) => (
-                <Stack direction="column">
-                  <SongList key={list.id} {...list} deleteMode={deleteModeActive} />
+                <Stack key={list.id} direction="column">
+                  <SongList {...list} deleteMode={deleteModeActive} />
                   <Button
                     onClick={() => setPlaylistId(list.id)}
                   > Show

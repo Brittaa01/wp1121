@@ -26,8 +26,7 @@ const ListSchema = new mongoose.Schema<ListDocument>(
     ],
     description: {
       type: String,
-      required: false,
-      default: "Add a description",
+      required: true,
     },
   },
   {
