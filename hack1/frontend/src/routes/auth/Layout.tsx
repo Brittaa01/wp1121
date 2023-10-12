@@ -84,8 +84,9 @@ const AuthLayout = () => {
                 value={tab.path}
                 className="last-of-type:border-r-0"
                 data-testid={`tab-${tab.path}`}
-              >{tab.path}
-                <NavLink to={tab.title} />
+              >{tab.title}
+                <NavLink to={`/${tab.title}`} />
+              
               </TabsTrigger>
               /* End of TODO 1.3 */
             ))}
@@ -98,8 +99,8 @@ const AuthLayout = () => {
             {/* The logo should be vscoddit.svg in the public folder. */}
             {/* The logo should have alt text "VSCoddit Logo". */}
             {/* The title should be "VSCoddit" */}
-            <img src="/vscodit.svg" data-testid="header-logo" className="h-5 w-5 brightness-200" />
-            <span data-testid="header-title"> VSCoddit</span>
+            <img src="/vscodit.svg" data-testid="header-logo" className="h-5 w-5 brightness-200" alt='VSCoddit Logo'></img>
+            <span data-testid="header-title" title='VSCoddit'></span>
             {/* END of TODO 1.1 */}
           </CardTitle>
           <CardDescription>
@@ -124,8 +125,7 @@ const AuthLayout = () => {
                 name="username"
                 autoComplete="username"
                 placeholder='Enter Username'
-                defaultValue={username}
-                required={true}
+                required
                 onChange={(e) => setUsername(e.target.value)}
               />
               {/* End of TODO 1.4 */}
@@ -144,7 +144,7 @@ const AuthLayout = () => {
                 name="password"
                 autoComplete="current-password"
                 placeholder='Enter Password'
-                required={true}
+                required
                 onChange={(e) => setPassword(e.target.value)}
 
               />
@@ -170,7 +170,7 @@ const AuthLayout = () => {
                 name="confirm-password"
                 autoComplete="new-password"
                 placeholder='Confirm Password'
-                required={true}
+                required
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               {/* End of TODO 1.5 */}
