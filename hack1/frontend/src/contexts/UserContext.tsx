@@ -32,8 +32,8 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
   const { toast } = useToast();
 
 
-  /*if(!authenticated)
-
+  /*if(!authenticated && location !== )
+  /* navigate('/login');
   /* TODO 1.2: Redirect to Login Page (5%) */
   /* Add a useEffect hook that redirects the user to the login page if they are not authenticated. */
   /* Only redirect if the user is not on the login or register page. */
