@@ -27,7 +27,7 @@ function AuthForm() {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: `${publicEnv.NEXT_PUBLIC_BASE_URL}/projects`,
+        callbackUrl: `<NEXT_PUBLIC_BASE_URL>/projects`,
       });
     
     // TODO: 3. end

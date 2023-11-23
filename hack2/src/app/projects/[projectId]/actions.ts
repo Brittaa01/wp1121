@@ -20,7 +20,7 @@ export async function getProject(projectId: string) {
 
   const userToProject = await db.query.usersToProjectsTable.findFirst({
     // TODO: 8. Select the correct project by userId and projectId
-
+  
     // TODO: 8. end
     columns: {},
     with: {
@@ -100,7 +100,11 @@ export async function updateTaskComplete(
   });
 
   // TODO: 9. Update the task's `completed` column
-
+  await db
+  .update(tasksTable)
+  .set({ completed })
+  .where(eq(tasksTable.displayId, taskId))
+  .returning();
   // TODO: 9. end
 
   revalidatePath(`/projects/${projectId}`);
