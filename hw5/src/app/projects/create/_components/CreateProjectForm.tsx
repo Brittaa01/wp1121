@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import Link from "next/link";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { createProject } from "../../actions";
 import { Loader2 } from "lucide-react";
@@ -36,7 +36,7 @@ export default function CreateProjectForm() {
       //href={`/projects/${newProject.id}`}
       //redirect(`/projects/${newProject.id}`);
       //redirect('/login')
-      console.log("lyckas redirect");
+    
       // TODO: 5. end
     } catch (error) {
       if (error instanceof Error) {
