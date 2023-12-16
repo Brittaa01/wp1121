@@ -44,6 +44,7 @@ export async function getProject(projectId: string) {
       },
     },
   });
+
   return userToProject;
 }
 
